@@ -1,29 +1,20 @@
 package com.plantronics.device.example;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.content.Intent;
-
-import com.plantronics.device.Device;
+import android.widget.TextView;
 
 public class MainActivity extends Activity implements OnClickListener{
-
-    private static final String TAG = "com.plantronics.device.example.MainActivity";
-
-    private Context _context;
-    private Device _device;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
-        _context = this;
 
         // Set up a click listener for the Log In button.
         View loginButton = findViewById(R.id.login_button);
@@ -53,11 +44,21 @@ public class MainActivity extends Activity implements OnClickListener{
         }
         return super.onOptionsItemSelected(item);
     }
+
     public void onClick(View v) {
         if(v.getId() == R.id.login_button)
         {
-            Intent i = new Intent(this, LogIn.class);
-            startActivity(i);
+            String username = ((TextView)findViewById(R.id.username_textbox)).getText().toString();
+            String password = ((TextView)findViewById(R.id.password_textbox)).getText().toString();
+
+            SignInActivity newStuff = new SignInActivity(this,((TextView)findViewById(R.id.error_message_field)));
+            newStuff.execute(username, password);
+
+            TextView error_field = ((TextView)findViewById(R.id.error_message_field));
+            if (error_field.toString() == "True"){
+                Intent i = new Intent(this, AfterLogin.class);
+                startActivity(i);
+            }
         }
         else if(v.getId() == R.id.new_user_button)
         {
