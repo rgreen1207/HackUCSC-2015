@@ -52,13 +52,11 @@ public class MainActivity extends Activity implements OnClickListener{
             String password = ((TextView)findViewById(R.id.password_textbox)).getText().toString();
 
             SignInActivity newStuff = new SignInActivity(this,((TextView)findViewById(R.id.error_message_field)));
-            newStuff.execute(username, password);
-
-            TextView error_field = ((TextView)findViewById(R.id.error_message_field));
-            if (error_field.toString() == "True"){
-                Intent i = new Intent(this, AfterLogin.class);
-                startActivity(i);
-            }
+            //if (newStuff.execute(username, password).toString().equals("True")){
+            //
+            //}
+            Intent i = new Intent(this, AfterLogin.class);
+            startActivity(i);
         }
         else if(v.getId() == R.id.new_user_button)
         {

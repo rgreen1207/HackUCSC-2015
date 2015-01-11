@@ -62,8 +62,8 @@ public class SignInActivity  extends AsyncTask<String,Void,String>{
             return new String("Exception: " + e.getMessage());
         }
     }
-    //protected void onPostExecute(String result){
-    //    //
-    //    this.statusField.setText("Login Successful");
-    //}
+    protected void onPostExecute(String result){
+        //
+        this.statusField.setText("Login Successful");
+    }
 }
