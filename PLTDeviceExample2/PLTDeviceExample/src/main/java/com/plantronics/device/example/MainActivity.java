@@ -29,7 +29,7 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 	private Context 		_context;
 	private Device 			_device;
 
-	private ProgressBar		_headingProgressBar;
+/*	private ProgressBar		_headingProgressBar;
 	private ProgressBar		_pitchProgressBar;
 	private ProgressBar		_rollProgressBar;
 	private TextView		_headingValueTextView;
@@ -43,7 +43,16 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 	private TextView		_freeFallValueTextView;
 	private TextView		_magnetometerCalValueTextView;
 	private TextView		_gyroscopeCalValueTextView;
-	private Button			_calOrientationButton;
+	private Button			_calOrientationButton;*/
+
+    private TextView		_fell_data;
+    private TextView		_fall_data;
+    private TextView		_wearing_data;
+    private TextView		_proximity_data;
+    private TextView		_distance_data;
+    private TextView		_taps_data;
+    private TextView		_steps_data;
+    private TextView		_connected_data;
 
 
 	/* ****************************************************************************************************
@@ -56,7 +65,7 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 
 		_context = this;
 
-		_headingProgressBar = ((ProgressBar)findViewById(R.id.headingProgressBar));
+/*		_headingProgressBar = ((ProgressBar)findViewById(R.id.headingProgressBar));
 		_pitchProgressBar = ((ProgressBar)findViewById(R.id.pitchProgressBar));
 		_rollProgressBar = ((ProgressBar)findViewById(R.id.rollProgressBar));
 		_headingValueTextView = ((TextView)findViewById(R.id.headingValueTextView));
@@ -76,9 +85,18 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 			public void onClick(View v) {
 				calOrientationButton();
 			}
-		});
+		});*/
 
-		Device.initialize(this, new Device.InitializationCallback() {
+        _fell_data = ((TextView)findViewById(R.id.text_fell));
+        _fall_data = ((TextView)findViewById(R.id.text_fall));
+        _wearing_data = ((TextView)findViewById(R.id.text_wearing));
+        _proximity_data = ((TextView)findViewById(R.id.text_proximity));
+        _distance_data = ((TextView)findViewById(R.id.text_distance));
+        _taps_data = ((TextView)findViewById(R.id.text_taps));
+        _steps_data = ((TextView)findViewById(R.id.text_steps));
+        _connected_data = ((TextView)findViewById(R.id.text_connected));
+
+        Device.initialize(this, new Device.InitializationCallback() {
 			@Override
 			public void onInitialized() {
 				Log.i(TAG, "onInitialized()");
@@ -228,7 +246,7 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 					OrientationTrackingInfo theInfo = (OrientationTrackingInfo)info;
 					EulerAngles eulerAngles = theInfo.getEulerAngles();
 
-					int heading = (int)Math.round(eulerAngles.getX());
+					/*int heading = (int)Math.round(eulerAngles.getX());
 					int pitch = (int)Math.round(eulerAngles.getY());
 					int roll = (int)Math.round(eulerAngles.getZ());
 
@@ -240,39 +258,44 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 					// most people find it more intuitive if the angle increases when rotated in the opposite direction
 					_headingValueTextView.setText(heading + "°");
 					_pitchValueTextView.setText(pitch + "°");
-					_rollValueTextView.setText(roll + "°");
+					_rollValueTextView.setText(roll + "°");*/
 
 				}
 				else if (info.getClass() == WearingStateInfo.class) {
 					WearingStateInfo theInfo = (WearingStateInfo)info;
-					_wearingStateValueTextView.setText((theInfo.getIsBeingWorn() ? "yes" : "no"));
+					//_wearingStateValueTextView.setText((theInfo.getIsBeingWorn() ? "yes" : "no"));
+                    _wearing_data.setText((theInfo.getIsBeingWorn() ? "yes" : "no"));
 				}
 				else if (info.getClass() == ProximityInfo.class) {
 					ProximityInfo theInfo = (ProximityInfo)info;
-					_localProximityValueTextView.setText(ProximityInfo.getStringForProximity(theInfo.getLocalProximity()));
-					_remoteProximityValueTextView.setText(ProximityInfo.getStringForProximity(theInfo.getRemoteProximity()));
+					//_localProximityValueTextView.setText(ProximityInfo.getStringForProximity(theInfo.getLocalProximity()));
+                    _proximity_data.setText(ProximityInfo.getStringForProximity(theInfo.getLocalProximity()));
+					//_remoteProximityValueTextView.setText(ProximityInfo.getStringForProximity(theInfo.getRemoteProximity()));
 				}
 				else if (info.getClass() == TapsInfo.class) {
 					TapsInfo theInfo = (TapsInfo)info;
 					int count = theInfo.getCount();
 					String tapss = (count > 1 ? " taps" : " tap");
-					_tapsValueTextView.setText((count == 0 ? "-" : count + tapss + " in " + TapsInfo.getStringForTapDirection(theInfo.getDirection())));
+					//_tapsValueTextView.setText((count == 0 ? "-" : count + tapss + " in " + TapsInfo.getStringForTapDirection(theInfo.getDirection())));
+                    _taps_data.setText((count == 0 ? "-" : count + tapss + " in " + TapsInfo.getStringForTapDirection(theInfo.getDirection())));
 				}
 				else if (info.getClass() == PedometerInfo.class) {
 					PedometerInfo theInfo = (PedometerInfo)info;
-					_pedometerValueTextView.setText(theInfo.getSteps() + " steps");
+					//_pedometerValueTextView.setText(theInfo.getSteps() + " steps");
+                    _steps_data.setText(theInfo.getSteps() + " steps");
 				}
 				else if (info.getClass() == FreeFallInfo.class) {
 					FreeFallInfo theInfo = (FreeFallInfo)info;
-					_freeFallValueTextView.setText((theInfo.getIsInFreeFall() ? "yes" : "no"));
+					//_freeFallValueTextView.setText((theInfo.getIsInFreeFall() ? "yes" : "no"));
+                    _fall_data.setText((theInfo.getIsInFreeFall() ? "yes" : "no"));
 				}
 				else if (info.getClass() == MagnetometerCalInfo.class) {
 					MagnetometerCalInfo theInfo = (MagnetometerCalInfo)info;
-					_magnetometerCalValueTextView.setText((theInfo.getIsCalibrated() ? "yes" : "no"));
+					//_magnetometerCalValueTextView.setText((theInfo.getIsCalibrated() ? "yes" : "no"));
 				}
 				else if (info.getClass() == GyroscopeCalInfo.class) {
 					GyroscopeCalInfo theInfo = (GyroscopeCalInfo)info;
-					_gyroscopeCalValueTextView.setText((theInfo.getIsCalibrated() ? "yes" : "no"));
+					//_gyroscopeCalValueTextView.setText((theInfo.getIsCalibrated() ? "yes" : "no"));
 				}
 			}
 		});
