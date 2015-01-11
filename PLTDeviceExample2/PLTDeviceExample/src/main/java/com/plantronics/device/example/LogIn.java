@@ -56,12 +56,7 @@ public class LogIn extends Activity implements OnClickListener{
     public void onClick(View v) {
         if(v.getId() == R.id.login_button)
         {
-            Intent i = new Intent(this, afterlogin.class);
-            startActivity(i);
-        }
-        else if(v.getId() == R.id.signup_button_activity_main)
-        {
-            Intent i = new Intent(this, SignUp.class);
+            Intent i = new Intent(this, AfterLogin.class);
             startActivity(i);
         }
     }
