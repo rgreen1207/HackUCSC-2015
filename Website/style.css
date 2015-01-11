@@ -26,6 +26,13 @@ header .profile h1 {
 	font-weight: 700;
 	line-height: 24px;
 }
+header .profile h2 {
+	font-family: sans-serif;
+	color: rgba(146,146,146,1.00);
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 24px;
+}
 header .profile h3 {
 	font-family: sans-serif;
 	color: rgba(146,146,146,1.00);

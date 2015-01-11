@@ -6,3 +6,4 @@ if (!$link) {
 echo 'Connected successfully'; 
 mysql_select_db(ucsc_hack); 
 ?> 
+ 

@@ -1,5 +1,5 @@
 <!-- //accessing information through browser requests for Android application
-//base code adapted from http://www.tutorialspoint.com/android/android_php_mysql.htm
+//base code inspiration from http://www.tutorialspoint.com/android/android_php_mysql.htm
 -->
 <?php
 $con = mysqli_connect('animanga.dot5hostingmysql.com', 'ucsc_hack', 'hack', 'ucsc_hack'); 
@@ -10,12 +10,12 @@ if (mysqli_connect_errno($con))
 }
 
 //Uncomment for production
-//$username = $_POST['username'];
-//$password = $_POST['password'];
+$username = $_POST['username'];
+$password = $_POST['password'];
 
 //Comment for production
 $username = "Test";
-$password = "Test2";
+$password = "Test";
 
 $result = mysqli_query($con,"SELECT username FROM User where username='$username' and password='$password'");
 
