@@ -6,18 +6,18 @@
 
     <uses-sdk
         android:minSdkVersion="15"
-        android:targetSdkVersion="15" />
+        android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <android:uses-permission
+    <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
@@ -31,8 +31,55 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Debug"
+            android:label="@string/debug_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.Debug" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LogIn"
+            android:label="@string/login_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.LogIn" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AfterLogin"
+            android:label="@string/afterlogin_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.AfterLogin" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Settings"
+            android:label="@string/settings_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.Settings" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SignUp"
+            android:label="@string/signup_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.SignUp" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Testing"
+            android:label="@string/testing_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.Testing" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>
