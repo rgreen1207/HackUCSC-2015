@@ -2,16 +2,16 @@ package com.plantronics.device.example;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.content.Intent;
 
 import com.plantronics.device.Device;
 
-public class MainActivity extends Activity implements OnClickListener{
+public class SignUp extends Activity implements OnClickListener{
 
     private static final String TAG = "com.plantronics.device.example.MainActivity";
 
@@ -56,10 +56,10 @@ public class MainActivity extends Activity implements OnClickListener{
     public void onClick(View v) {
         if(v.getId() == R.id.login_button)
         {
-            Intent i = new Intent(this, LogIn.class);
+            Intent i = new Intent(this, afterlogin.class);
             startActivity(i);
         }
-        else if(v.getId() == R.id.new_user_button)
+        else if(v.getId() == R.id.signup_button_activity_main)
         {
             Intent i = new Intent(this, SignUp.class);
             startActivity(i);

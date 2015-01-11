@@ -1,0 +1,313 @@
+/* ********************************************************************************************************
+	MainActivity.java
+	com.plantronics.device.example
+
+	Created by Morgan Davis on 04/01/2014.
+	Copyright (c) 2014 Plantronics, Inc. All rights reserved.
+***********************************************************************************************************/
+
+package com.plantronics.device.example;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+
+import com.plantronics.device.ConnectionListener;
+import com.plantronics.device.Device;
+import com.plantronics.device.InfoListener;
+import com.plantronics.device.PairingListener;
+import com.plantronics.device.Subscription;
+import com.plantronics.device.info.EulerAngles;
+import com.plantronics.device.info.FreeFallInfo;
+import com.plantronics.device.info.GyroscopeCalInfo;
+import com.plantronics.device.info.Info;
+import com.plantronics.device.info.MagnetometerCalInfo;
+import com.plantronics.device.info.OrientationTrackingInfo;
+import com.plantronics.device.info.PedometerInfo;
+import com.plantronics.device.info.ProximityInfo;
+import com.plantronics.device.info.TapsInfo;
+import com.plantronics.device.info.WearingStateInfo;
+
+import java.util.ArrayList;
+
+public class Debug extends Activity implements PairingListener, ConnectionListener, InfoListener {
+
+	private static final String TAG = "com.plantronics.device.example.MainActivity";
+
+	private Context 		_context;
+	private Device 			_device;
+
+/*	private ProgressBar		_headingProgressBar;
+	private ProgressBar		_pitchProgressBar;
+	private ProgressBar		_rollProgressBar;
+	private TextView		_headingValueTextView;
+	private TextView		_pitchValueTextView;
+	private TextView		_rollValueTextView;
+	private TextView		_wearingStateValueTextView;
+	private TextView		_localProximityValueTextView;
+	private TextView		_remoteProximityValueTextView;
+	private TextView		_tapsValueTextView;
+	private TextView		_pedometerValueTextView;
+	private TextView		_freeFallValueTextView;
+	private TextView		_magnetometerCalValueTextView;
+	private TextView		_gyroscopeCalValueTextView;
+	private Button			_calOrientationButton;*/
+
+    private TextView		_fell_data;
+    private TextView		_fall_data;
+    private TextView		_wearing_data;
+    private TextView		_proximity_data;
+    private TextView		_distance_data;
+    private TextView		_taps_data;
+    private TextView		_steps_data;
+    private TextView		_connected_data;
+
+
+	/* ****************************************************************************************************
+		 	Activity
+	*******************************************************************************************************/
+
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.debug_window);
+
+		_context = this;
+
+/*		_headingProgressBar = ((ProgressBar)findViewById(R.id.headingProgressBar));
+		_pitchProgressBar = ((ProgressBar)findViewById(R.id.pitchProgressBar));
+		_rollProgressBar = ((ProgressBar)findViewById(R.id.rollProgressBar));
+		_headingValueTextView = ((TextView)findViewById(R.id.headingValueTextView));
+		_pitchValueTextView = ((TextView)findViewById(R.id.pitchValueTextView));
+		_rollValueTextView = ((TextView)findViewById(R.id.rollValueTextView));
+		_wearingStateValueTextView = ((TextView)findViewById(R.id.wearingStateValueTextView));
+		_localProximityValueTextView = ((TextView)findViewById(R.id.localProximityValueTextView));
+		_remoteProximityValueTextView = ((TextView)findViewById(R.id.remoteProximityValueTextView));
+		_tapsValueTextView = ((TextView)findViewById(R.id.tapsValueTextView));
+		_pedometerValueTextView = ((TextView)findViewById(R.id.pedometerValueTextView));
+		_freeFallValueTextView = ((TextView)findViewById(R.id.freeFallValueTextView));
+		_magnetometerCalValueTextView = ((TextView)findViewById(R.id.magnetometerCalValueTextView));
+		_gyroscopeCalValueTextView = ((TextView)findViewById(R.id.gyroscopeCalValueTextView));
+		_calOrientationButton = ((Button)findViewById(R.id.calOrientationButton));
+		_calOrientationButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				calOrientationButton();
+			}
+		});*/
+
+        _fell_data = ((TextView)findViewById(R.id.text_fell));
+        _fall_data = ((TextView)findViewById(R.id.text_fall));
+        _wearing_data = ((TextView)findViewById(R.id.text_wearing));
+        _proximity_data = ((TextView)findViewById(R.id.text_proximity));
+        _distance_data = ((TextView)findViewById(R.id.text_distance));
+        _taps_data = ((TextView)findViewById(R.id.text_taps));
+        _steps_data = ((TextView)findViewById(R.id.text_steps));
+        _connected_data = ((TextView)findViewById(R.id.text_connected));
+
+        Device.initialize(this, new Device.InitializationCallback() {
+			@Override
+			public void onInitialized() {
+				Log.i(TAG, "onInitialized()");
+				Device.registerPairingListener((PairingListener)_context);
+
+				tryConnecting();
+			}
+
+			@Override
+			public void onFailure(int error) {
+				Log.i(TAG, "onFailure()");
+
+				if (error == Device.ERROR_PLTHUB_NOT_AVAILABLE) {
+					Log.i(TAG, "PLTHub was not found.");
+				} else if (error == Device.ERROR_FAILED_GET_DEVICE_LIST) {
+					Log.i(TAG, "Failed to get device list.");
+				}
+			}
+		});
+	}
+
+	@Override
+	public void onResume() {
+		Log.i(TAG, "onResume()");
+		super.onResume();
+
+		_context = this;
+
+		if (_device != null) {
+			_device.onResume();
+		}
+	}
+
+	@Override
+	protected void onPause() {
+		Log.i(TAG, "onPause()");
+		super.onPause();
+
+		_context = null;
+
+		if (_device != null) {
+			_device.onPause();
+		}
+	}
+
+	/* ****************************************************************************************************
+			 Private
+	*******************************************************************************************************/
+
+	private void tryConnecting() {
+		ArrayList<Device> devices = Device.getPairedDevices();
+		Log.i(TAG, "devices: " + devices);
+
+		try {
+			if (devices.size() > 0) {
+				_device = devices.get(0);
+				_device.registerConnectionListener((ConnectionListener)_context);
+				_device.openConnection();
+			}
+			else {
+				Log.i(TAG, "No paired PLT devices found!");
+			}
+		}
+		catch (Exception e) {
+			Log.e(TAG, "Exception opening connection: " + e);
+		}
+	}
+
+	private void calOrientationButton() {
+		// "zero" orientation tracking at current orientation
+		try {
+			_device.setCalibration(null, Device.SERVICE_ORIENTATION_TRACKING);
+		}
+		catch (Exception e) {
+			Log.e(TAG, "Exception calibrating orientation: " + e);
+		}
+	}
+
+	/* ****************************************************************************************************
+			 PairingListener
+	*******************************************************************************************************/
+
+	public void onDevicePaired(Device device) {
+		Log.i(TAG, "onDevicePaired(): " + device);
+
+		tryConnecting();
+	}
+
+	public void onDeviceUnpaired(Device device) {
+		Log.i(TAG, "onDeviceUnpaired(): " + device);
+	}
+
+	/* ****************************************************************************************************
+			 ConnectionListener
+	*******************************************************************************************************/
+
+	public void onConnectionOpen(Device device) {
+		Log.i(TAG, "onConnectionOpen()");
+
+		// subscribe to all services
+		try {
+			_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+			_device.subscribe(this, Device.SERVICE_WEARING_STATE, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+			_device.subscribe(this, Device.SERVICE_PROXIMITY, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+			_device.subscribe(this, Device.SERVICE_TAPS, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+			_device.subscribe(this, Device.SERVICE_PEDOMETER, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+			_device.subscribe(this, Device.SERVICE_FREE_FALL, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+			_device.subscribe(this, Device.SERVICE_MAGNETOMETER_CAL_STATUS, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+			_device.subscribe(this, Device.SERVICE_GYROSCOPE_CAL_STATUS, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+		}
+		catch (Exception e) {
+			Log.e(TAG, "Exception subscribing to services: " + e);
+		}
+
+		calOrientationButton();
+	}
+
+	public void onConnectionFailedToOpen(Device device, int error) {
+		Log.i(TAG, "onConnectionFailedToOpen()");
+
+		if (error == Device.ERROR_CONNECTION_TIMEOUT) {
+			Log.i(TAG, "Open connection timed out.");
+		}
+	}
+
+	public void onConnectionClosed(Device device) {
+		Log.i(TAG, "onConnectionClosed()");
+
+		_device = null;
+	}
+
+	/* ****************************************************************************************************
+			 InfoListener
+	*******************************************************************************************************/
+
+	public void onSubscriptionChanged(Subscription oldSubscription, Subscription newSubscription) {
+		Log.i(TAG, "onSubscriptionChanged(): oldSubscription=" + oldSubscription + ", newSubscription=" + newSubscription);
+	}
+
+	public void onInfoReceived(final Info info) {
+		Log.i(TAG, "onInfoReceived(): " + info);
+
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if (info.getClass() == OrientationTrackingInfo.class) {
+					OrientationTrackingInfo theInfo = (OrientationTrackingInfo)info;
+					EulerAngles eulerAngles = theInfo.getEulerAngles();
+
+					/*int heading = (int)Math.round(eulerAngles.getX());
+					int pitch = (int)Math.round(eulerAngles.getY());
+					int roll = (int)Math.round(eulerAngles.getZ());
+
+					_headingProgressBar.setProgress(heading + 180);
+					_pitchProgressBar.setProgress(pitch + 90);
+					_rollProgressBar.setProgress(roll + 180);
+
+					// heading uses the "right-hand" rule. http://en.wikipedia.org/wiki/Right-hand_rule
+					// most people find it more intuitive if the angle increases when rotated in the opposite direction
+					_headingValueTextView.setText(heading + "°");
+					_pitchValueTextView.setText(pitch + "°");
+					_rollValueTextView.setText(roll + "°");*/
+
+				}
+				else if (info.getClass() == WearingStateInfo.class) {
+					WearingStateInfo theInfo = (WearingStateInfo)info;
+					//_wearingStateValueTextView.setText((theInfo.getIsBeingWorn() ? "yes" : "no"));
+                    _wearing_data.setText((theInfo.getIsBeingWorn() ? "yes" : "no"));
+				}
+				else if (info.getClass() == ProximityInfo.class) {
+					ProximityInfo theInfo = (ProximityInfo)info;
+					//_localProximityValueTextView.setText(ProximityInfo.getStringForProximity(theInfo.getLocalProximity()));
+                    _proximity_data.setText(ProximityInfo.getStringForProximity(theInfo.getLocalProximity()));
+					//_remoteProximityValueTextView.setText(ProximityInfo.getStringForProximity(theInfo.getRemoteProximity()));
+				}
+				else if (info.getClass() == TapsInfo.class) {
+					TapsInfo theInfo = (TapsInfo)info;
+					int count = theInfo.getCount();
+					String tapss = (count > 1 ? " taps" : " tap");
+					//_tapsValueTextView.setText((count == 0 ? "-" : count + tapss + " in " + TapsInfo.getStringForTapDirection(theInfo.getDirection())));
+                    _taps_data.setText((count == 0 ? "-" : count + tapss + " in " + TapsInfo.getStringForTapDirection(theInfo.getDirection())));
+				}
+				else if (info.getClass() == PedometerInfo.class) {
+					PedometerInfo theInfo = (PedometerInfo)info;
+					//_pedometerValueTextView.setText(theInfo.getSteps() + " steps");
+                    _steps_data.setText(theInfo.getSteps() + " steps");
+				}
+				else if (info.getClass() == FreeFallInfo.class) {
+					FreeFallInfo theInfo = (FreeFallInfo)info;
+					//_freeFallValueTextView.setText((theInfo.getIsInFreeFall() ? "yes" : "no"));
+                    _fall_data.setText((theInfo.getIsInFreeFall() ? "yes" : "no"));
+				}
+				else if (info.getClass() == MagnetometerCalInfo.class) {
+					MagnetometerCalInfo theInfo = (MagnetometerCalInfo)info;
+					//_magnetometerCalValueTextView.setText((theInfo.getIsCalibrated() ? "yes" : "no"));
+				}
+				else if (info.getClass() == GyroscopeCalInfo.class) {
+					GyroscopeCalInfo theInfo = (GyroscopeCalInfo)info;
+					//_gyroscopeCalValueTextView.setText((theInfo.getIsCalibrated() ? "yes" : "no"));
+				}
+			}
+		});
+	}
+}
