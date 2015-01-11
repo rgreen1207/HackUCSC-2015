@@ -147,7 +147,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:textColor="#F80000"
-            android:text="Error: Incorrect login username or password."
+            android:text=""
             android:textAlignment="center"
             android:textSize="20dp"
             android:textIsSelectable="false" />
