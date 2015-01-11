@@ -13,7 +13,7 @@
         android:layout_marginTop="4pt"
         android:layout_marginLeft="4pt"
         android:layout_marginRight="4pt"
-        android:id="@+id/">
+        android:id="@+id/relative">
 
         <LinearLayout
             android:id="@+id/tapsLinearLayout"

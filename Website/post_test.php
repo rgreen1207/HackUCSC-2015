@@ -1,6 +1,3 @@
-<!-- //accessing information through browser requests for Android application
-//base code inspiration from http://www.tutorialspoint.com/android/android_php_mysql.htm
--->
 <?php
 $con = mysqli_connect('animanga.dot5hostingmysql.com', 'ucsc_hack', 'hack', 'ucsc_hack'); 
 //$con=mysqli_connect("","username","password","database name");
