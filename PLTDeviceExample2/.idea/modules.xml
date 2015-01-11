@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PLTDeviceExample/PLTDeviceExample.iml" filepath="$PROJECT_DIR$/PLTDeviceExample/PLTDeviceExample.iml" />
       <module fileurl="file://$PROJECT_DIR$/PLTDeviceExample2.iml" filepath="$PROJECT_DIR$/PLTDeviceExample2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/myapplication/myapplication.iml" filepath="$PROJECT_DIR$/myapplication/myapplication.iml" />
     </modules>
   </component>
 </project>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical" android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="Debug Window"
+    android:id="@+id/text_window"
+    android:layout_centerHorizontal="true"
+    android:textSize="40dp" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="40sp"
+    android:text="Fell:"
+    android:id="@+id/text_fell"
+    android:layout_below="@+id/text_window"
+    android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text=" - "
+        android:id="@+id/text_fell_data"
+        android:layout_toRightOf="@+id/text_fell"
+        android:layout_below="@+id/text_window" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="40sp"
+    android:text="Fall:"
+    android:id="@+id/text_fall"
+    android:layout_below="@+id/text_fell"
+    android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text=" - "
+        android:id="@+id/text_fall_data"
+        android:layout_toRightOf="@+id/text_fall"
+        android:layout_below="@+id/text_fell" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="40sp"
+    android:text="Wearing:"
+    android:id="@+id/text_wearing"
+    android:layout_below="@+id/text_fall"
+    android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text=" - "
+        android:id="@+id/text_wearing_data"
+        android:layout_toRightOf="@+id/text_wearing"
+        android:layout_below="@+id/text_fall" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="40sp"
+    android:text="Proximity:"
+    android:id="@+id/text_proximity"
+    android:layout_below="@+id/text_wearing"
+    android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text=" - "
+        android:id="@+id/text_proximity_data"
+        android:layout_toRightOf="@+id/text_proximity"
+        android:layout_below="@+id/text_wearing" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="40sp"
+    android:text="Distance:"
+    android:id="@+id/text_distance"
+    android:layout_below="@+id/text_proximity"
+    android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text=" - "
+        android:id="@+id/text_distance_data"
+        android:layout_toRightOf="@+id/text_distance"
+        android:layout_below="@+id/text_proximity" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="40sp"
+    android:text="Taps:"
+    android:id="@+id/text_taps"
+    android:layout_below="@+id/text_distance"
+    android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text=" - "
+        android:id="@+id/text_taps_data"
+        android:layout_toRightOf="@+id/text_taps"
+        android:layout_below="@+id/text_distance" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="40sp"
+    android:text="Steps:"
+    android:id="@+id/text_steps"
+    android:layout_below="@+id/text_taps"
+    android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text=" - "
+        android:id="@+id/text_steps_data"
+        android:layout_toRightOf="@+id/text_steps"
+        android:layout_below="@+id/text_taps" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="40sp"
+    android:text="Connected:"
+    android:id="@+id/text_connected"
+    android:layout_below="@+id/text_steps"
+    android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text=" - "
+        android:id="@+id/text_connected_data"
+        android:layout_toRightOf="@+id/text_connected"
+        android:layout_below="@+id/text_steps" />
+</RelativeLayout>
