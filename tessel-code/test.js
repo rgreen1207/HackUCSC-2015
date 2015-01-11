@@ -31,6 +31,7 @@ var fallen = false;
 hasFallen();
 loop();
 var servomove = false;
+var R = 0;
 
 function loop() {
     setInterval(function () {
@@ -61,8 +62,14 @@ function moveservo1() {
             if(z == 4)
             {
                 console.log('checking to see if still fallen');
+                R++;
                 hasFallen();
+                if (R == 2)
+                {
+                    fallen = false;
+                }
                 z = 0;
+                loop();
             }
         }, 1000);
     });
