@@ -99,6 +99,12 @@ footer {
 	font-weight: 700;
 }
 
+#form { 
+	text-align: center; 
+	width 250px;
+	margin: 0 auto;
+}
+
 
 @media only screen and (min-width : 285px) and (max-width : 480px) {
 header {
