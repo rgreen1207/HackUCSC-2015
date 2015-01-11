@@ -87,6 +87,7 @@ header .profile p {
 	text-decoration: none;
 }
 .blankspace {
+	margin: 1% 1% 1% 1%;
 	margin-left: 1%;
 	margin-right: 1%;
 }
@@ -104,6 +105,95 @@ footer {
 	width 250px;
 	margin: 0 auto;
 }
+
+#mainpage { 
+	width: inherit;
+	margin: 0 auto; 
+	text-align: center; 
+	display: inline-block;
+}
+
+#commands { 
+	text-align: center; 
+	width: 300px; 
+	border: medium;
+	float: left;
+	display: inline-block;
+}
+
+#mainarea { 
+	text-align: center; 
+	width : 63%; 
+	border: medium black;
+	float:right;
+	display: inline-block; 
+}
+
+#mainpage #menu #commands .link { 
+	width: 75%;
+	height: 30px;
+	background-color: rgba(208,207,207,1.00);
+	display: inline-block;
+	text-align: center;
+	padding-top: 3%;
+	cursor: pointer;
+}
+
+#mainpage #menu #commands .link:hover {
+	background-color: rgba(240,0,0,0.65);
+}
+#mainpage #menu #commands .link a {
+	color: rgba(255,255,255,1.00);
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 18px;
+	text-decoration: none;
+}
+
+
+#mainpage #menu #mainarea .goodinfo { 
+	width: 100%;
+	height: 30px;
+	background-color: rgba(196, 226, 189, 1.0);
+	display: inline-block;
+	text-align: center;
+	padding-top: 3%;
+	cursor: pointer;
+}
+
+#mainpage #menu #mainarea .goodinfo:hover {
+		background-color: rgba(208,207,207,0.5);
+}
+#mainpage #menu #mainarea .goodinfo a {
+	color: rgba(255,255,255,1.00);
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 18px;
+	text-decoration: none;
+}
+
+
+#mainpage #menu #mainarea .badinfo { 
+	width: 100%;
+	height: 30px;
+	background-color: rgba(239, 60, 57, .85);
+	display: inline-block;
+	text-align: center;
+	padding-top: 3%;
+	cursor: pointer;
+}
+
+#mainpage #menu #mainarea .badinfo:hover {
+		background-color: rgba(208,207,207,0.5);
+}
+#mainpage #menu #mainarea .badinfo a {
+	color: rgba(255,255,255,1.00);
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 18px;
+	text-decoration: none;
+}
+
 
 
 @media only screen and (min-width : 285px) and (max-width : 480px) {

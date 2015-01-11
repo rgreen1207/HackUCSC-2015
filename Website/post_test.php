@@ -10,10 +10,6 @@ if (mysqli_connect_errno($con))
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-//Comment for production
-$username = "Test";
-$password = "Test";
-
 $result = mysqli_query($con,"SELECT username FROM User where username='$username' and password='$password'");
 
 $row = mysqli_fetch_array($result);
