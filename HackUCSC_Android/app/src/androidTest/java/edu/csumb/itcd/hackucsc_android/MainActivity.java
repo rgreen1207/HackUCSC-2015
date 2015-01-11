@@ -128,6 +128,7 @@ public class MainActivity extends Activity implements PairingListener, Connectio
                 _device = devices.get(0);
                 _device.registerConnectionListener((ConnectionListener)_context);
                 _device.openConnection();
+                _state = new StateTracker();
                 _state.setConnected(true);
             }
             else {
@@ -182,6 +183,7 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 
         _device = null;
         _state.setConnected(false);
+        _state = null;
     }
 
     public void onSubscriptionChanged(Subscription oldSubscription, Subscription newSubscription) {
