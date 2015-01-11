@@ -1,5 +1,7 @@
 <html>
 <head>
+<script type="text/javascript" src="https://mandrillapp.com/api/docs/js/mandrill.js"></script>
+<script type="text/javascript" src="send-email.js"></script>
 <meta charset="utf-8">
 <title>Elderly Integrated Care System</title>
 <link href="style.css" rel="stylesheet" type="text/css">
@@ -26,9 +28,9 @@
 <div id="mainpage"> 
 	<section id="menu">
     	<div id="commands"> 
-			<div class="link"><a href="#" title="ViewUsers">View Residents</a></div>
+			<div onclick="location.href='register.html';" class="link"><a href="register.html" title="ViewUsers">Register Residents</a></div>
 			<br><br>
-            <div class="link"><a href="#" title="RegisterRes">Register Resident</a></div> 
+            <div onclick="location.href='viewresidents.php';" class="link"><a href="viewresidents.php" title="RegisterRes">View Users</a></div> 
             <br><br>
                                  
         </div>
@@ -52,6 +54,12 @@
                 while ($row = mysqli_fetch_assoc($result)) { 
 					if ($row["hasFallen"] == 1) {
 						echo "<script type='text/javascript'>alert('". $row["user_f_name"] . " in Room Number " . $row["room"] . " has fallen! Please send assistance immediately.');</script>";
+						echo '<script type="text/javascript">'
+   , 'sendTheMail();'
+   , '</script>'
+;
+						
+				
                     echo "<div class = \"badinfo\">Name: " . $row["user_f_name"]. " " . $row["user_l_name"]. "</div><br>";
 					} else { 
 							                    echo "<div class = \"goodinfo\">Name: " . $row["user_f_name"]. " " . $row["user_l_name"]. "</div><br>";
