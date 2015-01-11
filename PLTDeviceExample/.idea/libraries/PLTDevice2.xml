@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="PLTDevice">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/PLTDevice.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
