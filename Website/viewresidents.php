@@ -54,11 +54,11 @@
                 while ($row = mysqli_fetch_assoc($result)) { 
 					if ($row["hasFallen"] == 1) {
 						echo "<script type='text/javascript'>alert('". $row["user_f_name"] . " in Room Number " . $row["room"] . " has fallen! Please send assistance immediately.');</script>";
-						echo '<script type="text/javascript">'
+						/*echo '<script type="text/javascript">'
    , 'sendTheMail();'
    , '</script>'
 ;
-						
+						*/
 				
                     echo "<div class = \"badinfo\">Name: " . $row["user_f_name"]. " " . $row["user_l_name"]. "</div><br>";
 					} else { 
